@@ -1,8 +1,15 @@
 import React,{useState}from 'react'
 import './Auth.css'
+import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {signup,login} from '../../actions/auth'
 
 
 const Auth = () => {
+
+   
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
 
    const handleSwitch=()=>{
       setIsSignUp(!IsSignUp)
@@ -12,10 +19,28 @@ const Auth = () => {
   const[name,setName]=useState('');
   const[email,setEmail]=useState('');
   const[password,setPassword]=useState('');
+
+  const handleSubmit=(e)=>{
+     e.preventDefault();
+     console.log({name,email,password})
+     if(!email && !password){
+      alert("enter name and password");
+     }
+     if(IsSignUp){
+      if(!name){
+         alert("enter name to continue");
+      }
+     dispatch(signup({name,email,password},navigate))
+     }
+     else{
+      dispatch(login({email,password},navigate))
+     }
+  }
+
   return (
      <section className='auth-section'>
         <div className='auth-container-2'>
-         <form>
+         <form onSubmit={handleSubmit}>
              {IsSignUp && (
              <label htmlFor="name">
                <h4>Name</h4>
@@ -28,7 +53,7 @@ const Auth = () => {
              </label>
              <label htmlFor="password">
                <h4>Password</h4>
-               <input type="text" id="password" onChange={(e)=>{setPassword(e.target.value)}}/>
+               <input type="password" id="password" onChange={(e)=>{setPassword(e.target.value)}}/>
               </label>
               <button type="submit" className='auth-btn'>{IsSignUp?"Signup":"Login"}</button>
          </form>
