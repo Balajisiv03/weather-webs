@@ -7,17 +7,6 @@
     height: 100vh;
     font-family: Arial, sans-serif;
   }
-  
-  .time {
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-  
-  .weather {
-    font-size: 18px;
-    text-align: center;
-    z-index: 2;
-  }
 
    
 .time,
@@ -26,8 +15,17 @@
   animation: fadeIn 1s forwards, bounce 1s 1s forwards, changeColor 5s infinite alternate;
 }
 
+input{
+ border: none;
+ outline: none;
+ font-weight: 400;
+}
 
-
+input,button{
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px
+}
 
 @keyframes fadeIn {
   from {
@@ -51,9 +49,6 @@
 }
 
 @keyframes changeColor {
-  0% {
-    background-color: #f0f0f0;
-  }
   50% {
     background-color: #357aae; 
   }
@@ -88,22 +83,17 @@
 .time {
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 56px;
+  padding: 20px;
 }
 
 .weather {
   font-size: 18px;
+  text-align: center;
+  z-index: 2;
   font-weight: bold;
+  padding: 20px;
 }
-
-
-.loading-message {
-  font-size: 18px;
-  color: #000;
-}
-
-
-
-
 
 .daytime-color {
   background-color: #87CEEB; /* Light blue for daytime */

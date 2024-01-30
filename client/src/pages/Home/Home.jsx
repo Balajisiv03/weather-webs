@@ -4,6 +4,18 @@ import './Home.css';
 const Home = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [weatherData, setWeatherData] = useState(null);
+  const[search,setSearch]=useState("");
+
+  const searchButton=()=>{
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${'58b6e640da732bb8d49f7d66b8c3ff44'}`
+    ).then((res)=> res.json())
+    .then((result)=>{
+       setWeatherData(result);
+       console.log(result);
+    });
+
+  }
 
   useEffect(() => {
     // Fetch user's location (using geolocation API)
@@ -66,11 +78,22 @@ const Home = () => {
   };
 
   return (
-    <div className={`home-container ${getDynamicColor()} ${getWeatherColor()}`} style={containerStyle}>
-      <div className="time">{currentTime.toLocaleTimeString()}</div>
+     <div className={`home-container ${getDynamicColor()} ${getWeatherColor()}`} style={containerStyle}>
+       <h1 style={{marginBottom:"100px"}}>Weather App</h1>
+       <div>
+         <input type="text" placeholder='Enter location' onChange={(e)=>{setSearch(e.target.value)}}/>
+         <button onClick={searchButton}>Search</button>
+       </div>
+      <div className="time"><p>Current time: {currentTime.toLocaleTimeString()}</p></div>
       {weatherData ? (
         <div className="weather">
-          <p>{`${Math.round(weatherData.main.temp - 273.15)}°C, ${weatherData.weather[0].description}`}</p>
+          <p>{weatherData.name}, {weatherData.sys.country}</p>
+          <p>Temperature: {`${Math.round(weatherData.main.temp - 273.15)}°C`}</p>
+          <div>
+            <p>Latitude: {weatherData.coord.lat}</p>
+            <p>Longitude: {weatherData.coord.lon}</p>
+          </div>
+          <p>Weather: {`${weatherData.weather[0].description}`}</p>
         </div>
       ) : (
         <div>Loading weather data...</div>
