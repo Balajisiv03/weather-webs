@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs'
 import users from '../models/auth.js'
+import jwt from 'jsonwebtoken'
 
 
 

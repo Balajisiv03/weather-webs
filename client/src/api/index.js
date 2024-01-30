@@ -8,5 +8,6 @@ const API=axios.create({baseURL:"http://localhost:5000"});
 //     }
 //     return req;
 // })
+
 export const logIn=(authData)=>API.post('/user/login',authData);
 export const signUp=(authData)=>API.post('/user/signup',authData);
