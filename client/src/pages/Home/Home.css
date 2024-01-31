@@ -59,20 +59,18 @@ input,button{
 
 
 .clear-sky-color {
-  background-color: #87CEEB; 
-  color: #000; 
+  background-color: #87CEEB;
+  color: #000;
 }
 
 .cloudy-color {
-  background-color: #778899; 
-  color: #fff; 
+  background-color: #778899;
+  color: #fff;
 }
-
 
 .rainy-color {
   background-color: #4682B4; 
-  color: #fff; 
-}
+  color: #fff; }
 
 .default-color {
   background-color: #FFFFFF; 

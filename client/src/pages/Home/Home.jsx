@@ -5,23 +5,54 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [weatherData, setWeatherData] = useState(null);
   const[search,setSearch]=useState("");
+  // eslint-disable-next-line
+  const [timezone, setTimezone] = useState('');
+  const [error,setError]=useState(null)
+
 
   const searchButton=()=>{
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${'58b6e640da732bb8d49f7d66b8c3ff44'}`
-    ).then((res)=> res.json())
-    .then((result)=>{
-       setWeatherData(result);
-       console.log(result);
+
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${'58b6e640da732bb8d49f7d66b8c3ff44'}`
+  )
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('City not found');
+      }
+      return res.json();
+    })
+    .then((result) => {
+      setWeatherData(result);
+      if (result.timezone) {
+        setTimezone(result.timezone);
+      }
+      // Reset error and display alert
+      setError(null);
+      alert('Location found!'); 
+    })
+    .catch((error) => {
+      setError('Enter correct location');
+      console.error('Error fetching weather data:', error);
+      alert('Enter correct location');
     });
-
   }
-
+ 
   useEffect(() => {
     // Fetch user's location (using geolocation API)
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
-      
+
+      // const worldTimeApiUrl = `http://worldtimeapi.org/api/timezone`;
+    
+      // try {
+      //   const worldTimeResponse = await fetch(worldTimeApiUrl);
+      //   const worldTimeData = await worldTimeResponse.json();
+      //   const userTimezone = worldTimeData.timezone;
+      //   setTimezone(userTimezone);
+      // } catch (error) {
+      //   console.error('Error fetching user timezone:', error);
+      // }
+
 
       // Fetch weather information (using OpenWeatherMap API)
       const apiKey = '58b6e640da732bb8d49f7d66b8c3ff44';
@@ -29,9 +60,13 @@ const Home = () => {
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
       );
       const data = await apiResponse.json();
+      
 
       // Update state with weather data
       setWeatherData(data);
+      if(data.timezone){
+        setTimezone(data.timezone);
+      }
     });
 
     // Update current time every second
@@ -84,7 +119,7 @@ const Home = () => {
          <input type="text" placeholder='Enter location' onChange={(e)=>{setSearch(e.target.value)}}/>
          <button onClick={searchButton}>Search</button>
        </div>
-      <div className="time"><p>Current time: {currentTime.toLocaleTimeString()}</p></div>
+      <div className="time"><p>Current time: {currentTime.toLocaleTimeString()}</p></div> 
       {weatherData ? (
         <div className="weather">
           <p>{weatherData.name}, {weatherData.sys.country}</p>
