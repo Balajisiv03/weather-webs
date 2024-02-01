@@ -1,6 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import waterimg from '../../assets/waterimg.jpg'
 import './Home.css';
+import Header from '../../components/Header'
+import SearchBar from '../../components/SearchBar'
+import WeatherCard from '../../components/WeatherCard'
+
 
 const Home = () => {
 
@@ -127,36 +131,19 @@ if (weatherData && weatherData.main) {
   <div className={`${getDynamicColor()} ${getWeatherColor()}`} style={containerStyle}>
     <div className="container mt-5">
       <div className="row justify-content-center">
-        <div className='col-md-4'>
-        <h2><p className=" time card-text">Current time: {currentTime.toLocaleTimeString()}</p></h2>
+        <div className='col-md-7'>
+          <Header />
             <div className="weather card text-white text-center border-0">
                   <img src={waterimg} className="card-img" alt="..." width="300" height="600"/>
                   <div className="card-img-overlay">
-                        <div className="input-group mb-4 w-95 mx-auto">
-                          <input type="search" className="form-control" placeholder="Type location" aria-label="Type location"
-                           aria-describedby="basic-addon2" onChange={(e)=>setSearch(e.target.value)}/>
-                          <button type="submit" className="input-group-text" id="basic-addon2" onClick={handleSearch}>
-                            <i className='fas fa-search'></i>
-                           </button>
-                        </div>
+                     <SearchBar setSearch={setSearch} handleSearch={handleSearch}/>
 
                     {weatherData ? (
-                
-                        <div className='bg-black bg-opacity-50 py-3'>
-                          <h2 className="card-title">{weatherData.name}, {weatherData.sys.country}</h2>
-                          <p className="card-text">{currentTime.toDateString()}</p>
-                          <hr />
-                          <h2 className='card-title'>Temperature: {`${Math.round(weatherData.main.temp - 273.15)}°C`}</h2>  
-                          <i className={`fas ${icon} fa-5x`}></i>
-                          <h1 className='fw-bolder mb-1'>{weatherData.weather[0].description}</h1>       
-                          <p className="card-text mb-1"><small>Latitude: {weatherData.coord.lat}</small></p>         
-                          <p className="card-text"><small>Longitude: {weatherData.coord.lon}</small></p>         
-                          <p className='lead fw-bolder mb-0'>{weatherData.weather[0].main}</p>
-                          <p className='lead'>Min: {weatherData.main.temp_min} &deg;C | Max: {weatherData.main.temp_max} &deg;C</p>
-                        </div>
+                      <WeatherCard weatherData={weatherData} currentTime={currentTime} icon={icon}/>
                          ) :(
                           <div>Loading Weather data</div>
                          )}  
+                         <button type="button">Save location</button>
                   </div>
             </div>
         </div>
