@@ -1,31 +1,61 @@
+/*  
+ .clear-sky-color {
+  background-color: #87CEEB;
+  color: #000;
+  background-image: 'url(clearskyimg.jpg)'
+}
 
-  .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-  }
+.cloudy-color {
+  background-color: #778899;
+  color: #fff;
+  background-image: 'url(cloudyimg.jpg)'
 
-   
-.time,
+}
+
+.rainy-color {
+  background-color: #4682B4; 
+  color: #fff;
+  background-image: 'url(rainyimg.jpg)' } 
+
+.default-color {
+  background-color: #FFFFFF; 
+  color: #000;
+  background-image: 'url(waterimg.jpg)'
+} */
+
+.daytime-color {
+  background-color: #87CEEB; 
+  color: #000; 
+}
+
+.evening-color {
+  background-color: #4fb0ec;
+  color: #000; 
+}
+
+.night-color {
+  background-color: #191970; 
+  color: #fff; 
+}  
+
+
+/* 
+
+.time {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 56px;
+  padding: 20px;
+}
+
 .weather {
-  opacity: 0;
-  animation: fadeIn 1s forwards, bounce 1s 1s forwards, changeColor 5s infinite alternate;
-}
+  font-size: 18px;
+  text-align: center;
+  z-index: 2;
+  font-weight: bold;
+  padding: 20px;
+} 
 
-input{
- border: none;
- outline: none;
- font-weight: 400;
-}
-
-input,button{
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 10px
-}
 
 @keyframes fadeIn {
   from {
@@ -55,55 +85,12 @@ input,button{
   100% {
     background-color: #9e5656;
   }
-} 
+}  
 
-
-.clear-sky-color {
-  background-color: #87CEEB;
-  color: #000;
-}
-
-.cloudy-color {
-  background-color: #778899;
-  color: #fff;
-}
-
-.rainy-color {
-  background-color: #4682B4; 
-  color: #fff; }
-
-.default-color {
-  background-color: #FFFFFF; 
-  color: #000;
-}
-
-
-.time {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 56px;
-  padding: 20px;
-}
-
+   
+.time,
 .weather {
-  font-size: 18px;
-  text-align: center;
-  z-index: 2;
-  font-weight: bold;
-  padding: 20px;
-}
-
-.daytime-color {
-  background-color: #87CEEB; /* Light blue for daytime */
-  color: #000; 
-}
-
-.evening-color {
-  background-color: #4fb0ec; /* Gold for evening */
-  color: #000; 
-}
-
-.night-color {
-  background-color: #191970; /* Midnight blue for night */
-  color: #fff; 
-}
+  opacity: 0;
+  animation: fadeIn 1s forwards, bounce 1s 1s forwards, changeColor 5s infinite alternate;
+} 
+ */
